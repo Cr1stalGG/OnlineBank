@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>User</title>
+    </head>
+    <body>
+        <div th:with="user = ${user}"><br>
+            <div class="user_id">
+                <label>ID: </label>
+                <a th:text="${user.id}"/>
+            </div>
+            <div class="user_username">
+                <label>Username: </label>
+                <a th:text="${user.username}"/>
+            </div>
+            <div class="user_password">
+                <label>Password: </label>
+                <a th:text="${user.password}"/>
+            </div>
+            <div class="user_card">
+                <label>Card number: </label>
+                <a th:text="${user.cardNumber}"/>
+            </div>
+            <div class="card_number">
+                <a th:href="@{/user/add_card/${id}}">Add card</a>
+            </div>
+        </div>
+    </body>
+</html>

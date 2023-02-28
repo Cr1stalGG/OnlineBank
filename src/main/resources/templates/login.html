@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/menu.css" th:href="@{/menu.css}">
+    <link rel="stylesheet" href="../static/auth.css" th:href="@{/auth.css}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">OBank</a>
+        <nav>
+            <ul>
+                <li><a href="/sign/in" class="sign">Sign in</a></li>
+                <li><a href="/sign/up" class="sign">Sign up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="center">
+        <h1>Login</h1>
+        <form method="post">
+        <div class="txt_field">
+            <input type="text" required>
+            <span></span>
+            <label>Username</label>
+        </div>
+        <div class="txt_field">
+            <input type="password" required>
+            <span></span>
+            <label>Password</label>
+        </div>
+        <input type="submit" value="Login">
+        <div class="signup_link">
+            Not a member? <a href="/sing/up">Signup</a>
+        </div>
+        </form>
+    </div>
+
+    
+</body>
+</html>
