@@ -1,4 +1,4 @@
-package com.obank.controllers;
+package com.obank.controller;
 
 import com.obank.entity.User;
 import com.obank.repository.UserRepository;
