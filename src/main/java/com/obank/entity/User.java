@@ -1,14 +1,12 @@
 package com.obank.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Objects;
 
-@Getter
-@Setter
 @Entity
+@Data
 @Table(name = "USERS")
 public class User {
     @Id
