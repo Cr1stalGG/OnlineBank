@@ -1,48 +1,29 @@
 package com.obank.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Objects;
 
 @Entity
-@Data
 @Table(name = "USERS")
+@Data
+@AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "USERNAME", length = 21)
     private String username;
     @Column(name = "PASSWORD", length = 21)
     private String password;
-    @Column(name = "CARD_NUMBER", length = 16)
-    private String cardNumber;
 
-    public User() {
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    private Card card;
 
-    public User(String username, String password, String cardNumber) {
-        this.username = username;
-        this.password = password;
-        this.cardNumber = cardNumber;
-    }
+    public User(){
 
-    public User(Long id, String username, String password, String cardNumber) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.cardNumber = cardNumber;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", cardNumber='" + cardNumber + '\'' +
-                '}';
     }
 
     @Override
@@ -54,8 +35,7 @@ public class User {
 
         if (!Objects.equals(id, user.id)) return false;
         if (!Objects.equals(username, user.username)) return false;
-        if (!Objects.equals(password, user.password)) return false;
-        return Objects.equals(cardNumber, user.cardNumber);
+        return Objects.equals(password, user.password);
     }
 
     @Override
@@ -63,7 +43,15 @@ public class User {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (cardNumber != null ? cardNumber.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

@@ -5,7 +5,7 @@
     <title>Create card</title>
 </head>
 <body>
-    <form th:method="POST" th:action="@{/user/create_card/1}" >
+    <form th:method="POST" th:action="'/user/create_card/' + ${id}" >
         <div class="txt_field">
             <label>Card number</label>
             <span></span>

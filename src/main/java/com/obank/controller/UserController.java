@@ -1,5 +1,6 @@
 package com.obank.controller;
 
+import com.obank.entity.Card;
 import com.obank.entity.User;
 import com.obank.repository.UserRepository;
 import com.obank.service.UserService;
@@ -24,6 +25,9 @@ public class UserController {
         User user = userRepository.getReferenceById(id);
 
         model.addAttribute("user", user);
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("cardNumber", user.getCard().getCardNumber());
+        model.addAttribute("amount", user.getCard().getAmount());
 
         return "account";
     }
@@ -35,6 +39,7 @@ public class UserController {
     ){
 
         model.addAttribute("user",  userRepository.getReferenceById(id));
+        model.addAttribute("id", id);
 
         return "card_creating";
     }

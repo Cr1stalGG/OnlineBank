@@ -1,5 +1,6 @@
 package com.obank.controller;
 
+import com.obank.entity.Card;
 import com.obank.entity.User;
 import com.obank.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,11 @@ public class SignController {
 
     @PostMapping("/up_process")
     public String registrationAction(User user){
+        user.setCard(new Card());
         userRepository.save(user);
 
-        return "redirect:/user/id/1";
+
+        return "redirect:/user/id/"+user.getId().toString();
     }
 
     @GetMapping("/in")

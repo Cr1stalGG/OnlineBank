@@ -2,9 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <title>User</title>
+        <link rel="stylesheet" href="../static/menu.css" th:href="@{/menu.css}">
+        <title th:text="'Profile of ' + ${username}"/>
     </head>
     <body>
+        <header>
+            <a href="/" class="logo">OBank</a>
+            <nav>
+                <ul>
+                    <li><a href="/sign/in" class="sign">Sign in</a></li>
+                    <li><a href="/sign/up" class="sign">Sign up</a></li>
+                </ul>
+            </nav>
+        </header>
         <div th:with="user = ${user}"><br>
             <div class="user_id">
                 <label>ID: </label>
@@ -20,10 +30,14 @@
             </div>
             <div class="user_card">
                 <label>Card number: </label>
-                <a th:text="${user.cardNumber}"/>
+                <a th:text="${cardNumber}"/>
+            </div>
+            <div class="user_amount">
+                <label>User amount: </label>
+                <a th:text="${amount}"/>
             </div>
             <div class="card_number">
-                <a th:href="@{/user/add_card/${id}}">Add card</a>
+                <a th:href="'/user/add_card/' + ${id}">Add card</a>
             </div>
         </div>
     </body>

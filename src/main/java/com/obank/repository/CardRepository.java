@@ -1,10 +1,9 @@
 package com.obank.repository;
 
-import com.obank.entity.User;
+import com.obank.entity.Card;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    User getReferenceByUsername(String username);
+public interface CardRepository extends JpaRepository<Card, Long> {
 }
