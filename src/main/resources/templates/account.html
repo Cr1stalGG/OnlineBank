@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="../static/menu.css" th:href="@{/menu.css}">
+        <link rel="stylesheet" href="../static/card.css"th:href="@{/card.css}">
         <title th:text="'Profile of ' + ${username}"/>
     </head>
     <body>
@@ -15,30 +16,48 @@
                 </ul>
             </nav>
         </header>
-        <div th:with="user = ${user}"><br>
-            <div class="user_id">
-                <label>ID: </label>
-                <a th:text="${user.id}"/>
+        <div class="card">
+            <div class="bank-name" title="OBank">OBank</div>
+            <div class="chip">
+                <div class="side left"></div>
+                <div class="side right"></div>
+                <div class="vertical top"></div>
+                <div class="vertical bottom"></div>
             </div>
-            <div class="user_username">
-                <label>Username: </label>
-                <a th:text="${user.username}"/>
+            <div class="data">
+                <div th:with="user = ${user}"><br>
+                    <div class="user_id">
+                        <label>ID: </label>
+                        <a th:text="${user.id}"/>
+                    </div>
+                    <div class="user_card">
+                        <label>Card number: </label>
+                        <a th:text="${cardNumber}"/>
+                    </div>
+                    <div class="user_amount">
+                        <label>User amount: </label>
+                        <a th:text="${amount}"/>
+                    </div>
+                    <div class="user_username">
+                        <label>Username: </label>
+                        <a th:text="${user.username}"/>
+                    </div>
+                    <div class="user_password">
+                        <label>Password: </label>
+                        <a th:text="${user.password}"/>
+                    </div>
+                    <div class="add_card">
+                        <a th:href="'/user/add_card/' + ${id}">Add card</a>
+                    </div>
+                    <div class="exp-date-wrapper">
+                    <div class="exp-date">
+                    </div>
+                </div>
+                </div>
+                <div class="lines-down"></div>
+                <div class="lines-up"></div>
             </div>
-            <div class="user_password">
-                <label>Password: </label>
-                <a th:text="${user.password}"/>
-            </div>
-            <div class="user_card">
-                <label>Card number: </label>
-                <a th:text="${cardNumber}"/>
-            </div>
-            <div class="user_amount">
-                <label>User amount: </label>
-                <a th:text="${amount}"/>
-            </div>
-            <div class="card_number">
-                <a th:href="'/user/add_card/' + ${id}">Add card</a>
-            </div>
+
         </div>
     </body>
 </html>
