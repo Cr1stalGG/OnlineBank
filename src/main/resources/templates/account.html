@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../static/css/menu.css" th:href="@{/css/menu.css}">
-        <link rel="stylesheet" href="../static/css/menu.css" th:href="@{/css/menu.css}">
+        <link rel="stylesheet" href="../static/css/menu.css" th:href="@{/css/menu.css}" type="text/css">
+        <link rel="stylesheet" href="../static/css/menu.css" th:href="@{/css/menu.css}" type="text/css">
         <title th:text="'Profile of ' + ${username}"/>
     </head>
     <body>
@@ -11,7 +11,7 @@
             <a href="/" class="logo">OBank</a>
             <nav>
                 <ul>
-                    <li><a href="/login" class="sign">Sign in</a></li>
+                    <li><a href="/sign/in" class="sign">Sign in</a></li>
                     <li><a href="/sign/up" class="sign">Sign up</a></li>
                 </ul>
             </nav>

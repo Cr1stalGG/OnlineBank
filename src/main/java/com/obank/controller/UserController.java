@@ -28,9 +28,12 @@ public class UserController {
     }
 
     @GetMapping("/id/{id}")
-    public String getAccount(@PathVariable Long id, Model model){
+    public String getAccount(
+            @PathVariable Long id,
+            Model model
+    ){
         User user = userRepository.getReferenceByUsername(userService.getCurrentUsername());
-        System.out.println(user.toString());
+
         if(!user.getId().equals(id))
             return "redirect:/user/id/"+user.getId();
 
@@ -61,10 +64,12 @@ public class UserController {
     ){
         Pattern pattern = Pattern.compile("^[0-9]{16}$");
         Matcher matcher = pattern.matcher(cardNumber);
+
         if(matcher.matches())
             userService.updateCardNumber(id, cardNumber);
         else
             return "redirect:/user/add_card/{id}";
+
         return "redirect:/user/id/{id}";
     }
 

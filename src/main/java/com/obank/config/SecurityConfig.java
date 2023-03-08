@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -32,11 +33,13 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-         http
-                .authorizeHttpRequests().requestMatchers("/",  "/sign/**", "/h2-console/**").permitAll()
-                .and().authorizeHttpRequests().requestMatchers("/user/**").authenticated().and().formLogin();
+        http.authorizeHttpRequests().requestMatchers("/", "/sign/**", "/h2-console/**").permitAll();
 
-         return http.build();
+        http.authorizeHttpRequests().requestMatchers("/user/**").authenticated().and().formLogin().loginPage("/sign/in").loginProcessingUrl("/perform-login").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/sign/login-success").permitAll();
+
+        http.authorizeHttpRequests().requestMatchers("/css/**", "/js/**", "/images/**").permitAll();
+
+        return http.build();
     }
 
     @Bean

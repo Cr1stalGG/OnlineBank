@@ -12,5 +12,4 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         registry.addViewController("/sign/in").setViewName("login");
         registry.addViewController("/sign/up").setViewName("registration");
     }
-
 }
