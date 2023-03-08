@@ -3,6 +3,7 @@ package com.obank.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
@@ -10,21 +11,20 @@ import java.util.Objects;
 @Table(name = "USERS")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "USERNAME", length = 21)
     private String username;
-    @Column(name = "PASSWORD", length = 21)
+    @Column(name = "PASSWORD", length = 60)
     private String password;
+    @Column(name="ROLE", length = 10)
+    private String roles;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Card card;
-
-    public User(){
-
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -35,7 +35,8 @@ public class User {
 
         if (!Objects.equals(id, user.id)) return false;
         if (!Objects.equals(username, user.username)) return false;
-        return Objects.equals(password, user.password);
+        if (!Objects.equals(password, user.password)) return false;
+        return Objects.equals(roles, user.roles);
     }
 
     @Override
@@ -43,6 +44,7 @@ public class User {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
         return result;
     }
 
@@ -52,6 +54,7 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + roles + '\'' +
                 '}';
     }
 }

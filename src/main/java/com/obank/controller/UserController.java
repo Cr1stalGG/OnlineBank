@@ -6,6 +6,7 @@ import com.obank.repository.UserRepository;
 import com.obank.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.type.filter.RegexPatternTypeFilter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/user")
+@PreAuthorize("hasAuthority('ROLE_USER')")
 public class UserController {
     private final UserRepository userRepository;
     private final UserService userService;

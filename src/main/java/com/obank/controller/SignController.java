@@ -2,23 +2,24 @@ package com.obank.controller;
 
 import com.obank.entity.Card;
 import com.obank.entity.User;
-import com.obank.repository.UserRepository;
+import com.obank.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/sign")
 public class SignController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public SignController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public SignController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/up")
@@ -29,12 +30,13 @@ public class SignController {
     }
 
     @PostMapping("/up_process")
-    public String registrationAction(User user){
-        user.setCard(new Card());
-        userRepository.save(user);
+    public String registrationAction(User user, @RequestParam("password") String password, @RequestParam("confPassword") String confPassword){
+        if(password.equals(confPassword)) {
+            userService.save(user);
 
-
-        return "redirect:/user/id/"+user.getId().toString();
+            return "redirect:/user/id/" + user.getId().toString();
+        }else
+            return "redirect:/sign/up";
     }
 
     @GetMapping("/in")
