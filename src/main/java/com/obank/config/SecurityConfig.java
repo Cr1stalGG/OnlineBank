@@ -2,7 +2,6 @@ package com.obank.config;
 
 import com.obank.repository.UserRepository;
 import com.obank.service.UserUserDetailsService;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,12 +32,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests().requestMatchers("/", "/sign/**","/h2-console/**").permitAll()
-                .and().authorizeHttpRequests().requestMatchers("/user/**").authenticated().and().formLogin(
-                        (form) -> form.loginPage("/sign/in").permitAll()
-                ).logout().logoutSuccessUrl("/");
-        return http.build();
+         http
+                .authorizeHttpRequests().requestMatchers("/",  "/sign/**", "/h2-console/**").permitAll()
+                .and().authorizeHttpRequests().requestMatchers("/user/**").authenticated().and().formLogin();
+
+         return http.build();
     }
 
     @Bean
@@ -52,5 +50,5 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(12);
-    }
+}
 }

@@ -18,7 +18,7 @@ public class User {
     private Long id;
     @Column(name = "USERNAME", length = 21)
     private String username;
-    @Column(name = "PASSWORD", length = 60)
+    @Column(name = "PASSWORD", length = 255)
     private String password;
     @Column(name="ROLE", length = 10)
     private String roles;
