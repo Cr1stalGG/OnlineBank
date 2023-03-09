@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.Random;
 
 @Entity
 @Table(name = "CARDS")
@@ -16,11 +17,25 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "CARD_NUMBER")
-    private String  cardNumber ;
+    private String  cardNumber = generateCardNumber();
     @Column(name = "AMOUNT")
     private BigDecimal amount = BigDecimal.valueOf(0);
 
     public Card() {
+    }
+    private String generateCardNumber(){
+        final int from = 1000;
+        final int to = 9999;
+        StringBuffer cardNumber = new StringBuffer("");
+
+        for(int i = 0; i < 4; ++i){
+            cardNumber.append(getRandomNumberUsingNextInt(from, to));
+        }
+        return String.valueOf(cardNumber);
+    }
+    private int getRandomNumberUsingNextInt(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min) + min;
     }
 
     @Override

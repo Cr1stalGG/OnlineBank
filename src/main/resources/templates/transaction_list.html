@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/menu.css" th:href="@{/css/menu.css}" type="text/css">
+    <title th:text="'Transaction list of' +  ${username}"/>
+</head>
+<body>
+<header>
+    <a href="/" class="logo">OBank</a>
+    <nav>
+        <ul>
+            <li><a href="/user/id/0" class="sign">Account</a></li>
+            <li><a href="/sign/in" class="sign">Sign in</a></li>
+            <li><a href="/sign/up" class="sign">Sign up</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div >
+    <p>id----------from card-------------to card ----------amount </p>
+    <tr th:each="transaction : ${transactions}">
+        <td th:text="${transaction.id}"/>
+        <td th:text="${transaction.from.cardNumber}"/>
+        <td th:text="${transaction.to.cardNumber}"/>
+        <td th:text="${transaction.amount}"/>
+        <br>
+    </tr>
+</div>
+</body>
+</html>

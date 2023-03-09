@@ -31,6 +31,10 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Transaction> transaction;
 
+    public void setTransaction(Transaction transaction) {
+        this.transaction.add(transaction);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,9 +65,5 @@ public class User {
                 ", password='" + password + '\'' +
                 ", role='" + roles + '\'' +
                 '}';
-    }
-
-    public void setTransaction(Transaction transaction) {
-        this.transaction.add(transaction);
     }
 }

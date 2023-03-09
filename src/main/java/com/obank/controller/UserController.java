@@ -46,34 +46,6 @@ public class UserController {
         return "account";
     }
 
-    @GetMapping("/add_card/{id}")
-    public String getCardPage(
-            @PathVariable Long id,
-            Model model
-    ){
-
-        model.addAttribute("user",  userRepository.getReferenceById(id));
-        model.addAttribute("id", id);
-
-        return "card_creating";
-    }
-
-    @PostMapping("/create_card/{id}")
-    public String cardCreator(
-            @PathVariable Long id,
-            @RequestParam("cardNumber") String cardNumber
-    ){
-        Pattern pattern = Pattern.compile("^[0-9]{16}$");
-        Matcher matcher = pattern.matcher(cardNumber);
-
-        if(matcher.matches())
-            userService.updateCardNumber(id, cardNumber);
-        else
-            return "redirect:/user/add_card/{id}";
-
-        return "redirect:/user/id/{id}";
-    }
-
     @RequestMapping(value="/logout", method= RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -130,5 +102,15 @@ public class UserController {
         userService.getAmount(user.getId(), amount);
 
         return "redirect:/user/id/" + user.getId();
+    }
+
+    @GetMapping("/transaction_list")
+    public String transactionList(Model model){
+        User user = userService.getAuthUser();
+
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("transactions", user.getTransaction());
+
+        return "transaction_list";
     }
 }

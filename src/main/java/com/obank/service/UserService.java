@@ -24,16 +24,6 @@ public class UserService  {
         this.cardRepository = cardRepository;
     }
 
-    public void updateCardNumber(Long id, String cardNumber){
-        User user = userRepository.getReferenceById(id);
-
-        Card card = new Card();
-        card.setCardNumber(cardNumber);
-        card.setAmount(BigDecimal.valueOf(0.0));
-
-        user.setCard(card);
-        userRepository.save(user);
-    }
     public String getCurrentUsername() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth.getName();
@@ -62,6 +52,7 @@ public class UserService  {
     public void addTransaction(Long fromUserId, String toCardNumber, BigDecimal amount){
         User user = userRepository.getReferenceById(fromUserId);
         Card toCard = cardRepository.getReferenceByCardNumber(toCardNumber);
+        User toUser = userRepository.getUserByCard(toCard);
 
         if (user.getCard().getAmount().compareTo(amount) > 0 && user.getCard().getCardNumber() != null) {
             Transaction transaction = new Transaction();
@@ -70,12 +61,13 @@ public class UserService  {
             transaction.setAmount(amount);
 
             user.setTransaction(transaction);
+            toUser.setTransaction(transaction);
 
             user.getCard().setAmount(user.getCard().getAmount().subtract(amount));
-            toCard.setAmount(toCard.getAmount().add(amount));
+            toUser.getCard().setAmount(toCard.getAmount().add(amount));
 
             userRepository.save(user);
-            cardRepository.save(toCard);
+            userRepository.save(toUser);
         }
     }
 

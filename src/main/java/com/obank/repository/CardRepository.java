@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CardRepository extends JpaRepository<Card, Long> {
-    Card getReferenceByCardNumber(String catdNumber);
+    Card getReferenceByCardNumber(String cardNumber);
 }
