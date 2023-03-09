@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -25,6 +27,9 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Card card;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Transaction> transaction;
 
     @Override
     public boolean equals(Object o) {
@@ -56,5 +61,9 @@ public class User {
                 ", password='" + password + '\'' +
                 ", role='" + roles + '\'' +
                 '}';
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction.add(transaction);
     }
 }

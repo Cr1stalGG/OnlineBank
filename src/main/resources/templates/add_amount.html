@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add amount</title>
+</head>
+<body>
+<form th:method="POST" th:action="'/user/add_amount_process'" >
+  <div class="txt_field">
+    <label>amount</label>
+    <span></span>
+    <input name = "amount" id="amount" type="text" required>
+  </div>
+  <input type="submit" value="Add amount">
+</form>
+</body>
+</html>

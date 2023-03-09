@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -81,5 +82,53 @@ public class UserController {
             new SecurityContextLogoutHandler().logout(request, response, auth);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/transaction")
+    public String transaction(){
+        return "add_transaction";
+    }
+
+    @PostMapping("/add_transaction")
+    public String addTransaction(
+            @RequestParam("toCardNumber" )String toCardNumber,
+            @RequestParam("amount")BigDecimal amount
+    ){
+        User user = userService.getAuthUser();
+
+        userService.addTransaction(user.getId(), toCardNumber, amount);
+
+        return "redirect:/user/id/" + user.getId();
+    }
+
+    @GetMapping("/add_amount")
+    public String addAmount(){
+        return "add_amount";
+    }
+
+    @PostMapping("/add_amount_process")
+    public String addAmountProcess(
+            @RequestParam("amount") BigDecimal amount
+    ){
+        User user= userService.getAuthUser();
+
+        userService.addAmount(user.getId(), amount);
+
+        return "redirect:/user/id/" + user.getId();
+    }
+    @GetMapping("/get_amount")
+    public String getAmount(){
+        return "get_amount";
+    }
+
+    @PostMapping("/get_amount_process")
+    public String getAmountProcess(
+            @RequestParam("amount") BigDecimal amount
+    ){
+        User user= userService.getAuthUser();
+
+        userService.getAmount(user.getId(), amount);
+
+        return "redirect:/user/id/" + user.getId();
     }
 }

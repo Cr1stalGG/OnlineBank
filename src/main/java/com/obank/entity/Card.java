@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "CARD")
+@Table(name = "CARDS")
 @Data
 @AllArgsConstructor
 public class Card {
